@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>최규영 | 데이터 엔지니어 포트폴리오</title>
+<meta name="description" content="데이터 수집부터 ETL 파이프라인 구축, DW 모델링, AI 데이터 파이프라인까지 수행하는 최규영의 데이터 엔지니어 포트폴리오">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{
+  --accent:#2E7BB0; --accent-soft:#5BA4D4; --accent-wash:#EEF5FA; --accent-line:#D4E5F1;
+  --ink:#141719; --ink2:#3A4348; --muted:#6B757C; --faint:#9AA3A9;
+  --line:#E6E7E6; --line2:#D5D7D6;
+  --bg:#FFFFFF; --paper:#FAFAF9; --soft:#F5F6F5;
+  --a:#2E7BB0; --b:#E8703A;
+  --good:#1B7F53; --bad:#C0442A; --amber:#B7791F;
+  --shadow:0 1px 2px rgba(15,20,25,.04), 0 10px 32px rgba(15,20,25,.07);
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:78px;-webkit-text-size-adjust:100%}
+body{
+  font-family:"Pretendard Variable","Pretendard",-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR","Malgun Gothic",system-ui,sans-serif;
+  color:var(--ink); background:var(--bg); line-height:1.75;
+  font-size:16px; letter-spacing:-.01em;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font:inherit;letter-spacing:inherit;border:none;background:none;cursor:pointer;color:inherit;text-align:left}
+.wrap{max-width:1100px;margin:0 auto;padding:0 28px}
+.k-label{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+
+/* ---------- TOP BAR + NAV ---------- */
+.topbar{height:5px;background:var(--accent)}
+.nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:62px;gap:16px}
+.brand{font-family:var(--mono);font-weight:700;font-size:13px;letter-spacing:.12em;color:var(--ink);text-transform:uppercase}
+.brand i{font-style:normal;color:var(--accent)}
+.navlinks{display:flex;gap:2px;align-items:center}
+.navlinks a{font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);padding:8px 11px;font-weight:700}
+.navlinks a:hover{color:var(--ink);text-decoration:none}
+.navlinks a.cta{border:1px solid var(--ink);border-radius:999px;color:var(--ink);padding:8px 16px;margin-left:8px}
+.navlinks a.cta:hover{background:var(--ink);color:#fff}
+@media(max-width:900px){.navlinks a:not(.cta){display:none}}
+
+/* ---------- HERO ---------- */
+.hero{padding:84px 0 76px;border-bottom:1px solid var(--line);background:var(--bg)}
+.hero-grid{display:grid;grid-template-columns:1.5fr .9fr;gap:64px;align-items:start}
+@media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:44px}}
+.hero .k-label{color:var(--accent)}
+.disp{font-size:clamp(40px,6vw,72px);line-height:1.12;letter-spacing:-.045em;font-weight:800;margin-top:18px;word-break:keep-all}
+.disp .thin{font-weight:300;letter-spacing:-.03em}
+.disp em{font-style:normal;font-weight:800;border-bottom:5px solid var(--ink);padding-bottom:.02em}
+.disp .acc{color:var(--accent)}
+.lede{font-size:clamp(15.5px,1.8vw,17.5px);color:var(--ink2);margin-top:28px;max-width:560px;line-height:1.8}
+.lede b{font-weight:700;color:var(--ink)}
+.metaline{margin-top:26px;display:flex;flex-wrap:wrap;gap:7px}
+.pill{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;color:var(--ink2);border:1px solid var(--line2);padding:6px 13px;border-radius:999px;text-transform:uppercase}
+.btns{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:14px 24px;border-radius:999px;border:1px solid var(--ink);transition:all .2s}
+.btn.p{background:var(--ink);color:#fff}
+.btn.p:hover{background:#000;text-decoration:none}
+.btn.s{background:#fff;color:var(--ink)}
+.btn.s:hover{background:var(--ink);color:#fff;text-decoration:none}
+
+/* profile card */
+.pcard{border:1px solid var(--line);border-radius:14px;background:var(--paper);padding:34px 30px;text-align:center;position:relative}
+.pcard .ava{width:132px;height:132px;border-radius:50%;margin:0 auto;background:linear-gradient(150deg,#E7EEF3,#D8E4EC);display:grid;place-items:center;overflow:hidden;border:1px solid var(--line)}
+.pcard .ava svg{width:70px;height:70px;color:#A8B8C4}
+.pcard h3{font-size:21px;font-weight:800;letter-spacing:-.02em;margin-top:18px}
+.pcard .role{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-top:5px}
+.pcard .rows{margin-top:22px;border-top:1px solid var(--line);text-align:left}
+.pcard .row{display:flex;justify-content:space-between;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line);font-size:13px}
+.pcard .row span{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);padding-top:2px;flex:none}
+.pcard .row b{font-weight:600;color:var(--ink2);text-align:right;word-break:break-all;letter-spacing:0}
+.pcard .btn{width:100%;justify-content:center;margin-top:20px}
+.pcard .note{font-size:11px;color:var(--faint);margin-top:12px}
+
+.statrow{margin:64px 0 0;display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line)}
+.statrow > div{padding:26px 20px 30px;border-right:1px solid var(--line)}
+.statrow > div:first-child{padding-left:0}
+.statrow > div:last-child{border-right:none}
+.statrow b{display:block;font-size:30px;font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+.statrow span{font-family:var(--mono);font-size:10.5px;color:var(--muted);font-weight:700;letter-spacing:.08em;text-transform:uppercase;display:block;margin-top:5px}
+@media(max-width:720px){.statrow{grid-template-columns:repeat(2,1fr)}.statrow > div{border-bottom:1px solid var(--line);padding-left:0}.statrow > div:nth-child(2n){border-right:none}}
+
+/* ---------- SECTION ---------- */
+section{padding:84px 0}
+.shead{display:flex;align-items:center;gap:20px;margin-bottom:14px}
+.shead .k-label{color:var(--accent);flex:none}
+.shead::after{content:"";height:1px;background:var(--line);flex:1}
+h2{font-size:clamp(26px,3.6vw,38px);letter-spacing:-.035em;font-weight:800;line-height:1.25;text-transform:uppercase}
+h2 .lite{font-weight:inherit}
+.sub{color:var(--muted);margin-top:14px;font-size:15.5px;max-width:680px}
+.soft-sec{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+
+/* ---------- ABOUT ---------- */
+.about{display:grid;grid-template-columns:1.15fr 1fr;gap:56px;align-items:start;margin-top:40px}
+@media(max-width:860px){.about{grid-template-columns:1fr;gap:36px}}
+.about p{color:var(--ink2);margin-bottom:16px;font-size:15.5px}
+.about p strong{color:var(--ink);font-weight:700;box-shadow:inset 0 -8px 0 rgba(91,164,212,.25)}
+.strengths{display:grid}
+.str{padding:20px 0;border-bottom:1px solid var(--line)}
+.str:first-child{border-top:1px solid var(--line)}
+.str h4{font-size:15.5px;font-weight:800;letter-spacing:-.02em;display:flex;gap:14px;align-items:baseline}
+.str h4 i{font-family:var(--mono);font-style:normal;font-size:11px;font-weight:700;color:var(--accent);flex:none}
+.str p{font-size:13.8px;color:var(--muted);margin:8px 0 0 34px;line-height:1.7}
+
+/* ---------- RESUME ---------- */
+.resume{display:grid;grid-template-columns:1.35fr 1fr;gap:64px;margin-top:44px;align-items:start}
+@media(max-width:860px){.resume{grid-template-columns:1fr;gap:44px}}
+.rblock h3{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);
+  display:flex;align-items:center;gap:16px;margin-bottom:8px}
+.rblock h3::after{content:"";height:1px;background:var(--line2);flex:1}
+.rblock + .rblock{margin-top:44px}
+.entry{display:flex;justify-content:space-between;gap:22px;padding:22px 0;border-bottom:1px solid var(--line)}
+.entry:last-child{border-bottom:none}
+.entry .l{min-width:0}
+.entry h4{font-size:16.5px;font-weight:800;letter-spacing:-.02em}
+.entry .org{font-size:13px;color:var(--accent);font-weight:700;margin-top:2px}
+.entry ul{list-style:none;margin-top:10px}
+.entry ul li{position:relative;padding-left:15px;color:var(--ink2);font-size:14px;margin-bottom:6px;line-height:1.7}
+.entry ul li::before{content:"";position:absolute;left:1px;top:11px;width:4px;height:4px;border-radius:50%;background:var(--accent)}
+.entry ul li b{color:var(--ink);font-weight:700}
+.datepill{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--ink2);
+  border:1px solid var(--line2);border-radius:999px;padding:5px 13px;white-space:nowrap;height:fit-content;flex:none;background:#fff}
+@media(max-width:560px){.entry{flex-direction:column;gap:8px}.datepill{align-self:flex-start}}
+.exnote{margin-top:30px;font-size:12.5px;color:var(--faint);border-top:1px dashed var(--line2);padding-top:14px}
+
+/* ---------- SKILLS ---------- */
+.skgroup{font-family:var(--mono);font-size:11.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);display:flex;align-items:center;gap:16px;margin:44px 0 16px}
+.skgroup::after{content:"";height:1px;background:var(--line2);flex:1}
+.softs{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+@media(max-width:860px){.softs{grid-template-columns:1fr}}
+.soft-card{border:1px solid var(--line);border-radius:12px;padding:20px 22px;background:#fff}
+.soft-card h4{font-size:15px;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.soft-card p{font-size:13.5px;color:var(--muted);line-height:1.7}
+.skills{display:grid;grid-template-columns:repeat(4,1fr);margin-top:0;border-top:1px solid var(--line);border-left:1px solid var(--line)}
+@media(max-width:900px){.skills{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.skills{grid-template-columns:1fr}}
+.skill{border-right:1px solid var(--line);border-bottom:1px solid var(--line);padding:24px 22px;background:#fff}
+.skill h4{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.14em;color:var(--accent);text-transform:uppercase;margin-bottom:16px}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12.5px;font-weight:600;color:var(--ink2);background:var(--soft);border:1px solid var(--line);padding:5px 10px;border-radius:6px}
+
+/* ---------- PROJECT (accordion) ---------- */
+.pintro{margin-bottom:46px}
+.proj{border:1px solid var(--line);border-radius:16px;background:#fff;box-shadow:var(--shadow);overflow:hidden;margin-bottom:30px;transition:box-shadow .3s}
+.proj:hover{box-shadow:0 2px 4px rgba(15,20,25,.05), 0 16px 44px rgba(15,20,25,.10)}
+.proj-head{display:block;width:100%;padding:36px 40px 30px;cursor:pointer;background:#fff}
+@media(max-width:640px){.proj-head{padding:26px 22px}}
+.phead-top{display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+.pnum{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.14em;text-transform:uppercase}
+.pyear{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--faint);letter-spacing:.08em}
+.proj-head h3{font-size:clamp(21px,3.1vw,29px);letter-spacing:-.03em;font-weight:800;margin:14px 0 0;line-height:1.3;color:var(--ink)}
+.proj-head h3 .sub-t{display:block;font-size:.62em;font-weight:600;color:var(--muted);letter-spacing:-.02em;margin-top:6px}
+.proj-head .oneline{color:var(--ink2);margin-top:14px;font-size:15.5px;max-width:740px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
+.chip{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.06em;padding:5px 12px;border-radius:999px;
+  background:#fff;color:var(--ink2);border:1px solid var(--line2);text-transform:uppercase}
+.metagrid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:26px;border-top:1px solid var(--line)}
+.metagrid div{padding:14px 18px 2px 0;border-right:1px solid var(--line);margin-right:18px}
+.metagrid div:last-child{border-right:none;margin-right:0}
+.metagrid span{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.1em;color:var(--faint);text-transform:uppercase}
+.metagrid b{font-size:13.5px;font-weight:700;color:var(--ink2);letter-spacing:-.01em}
+@media(max-width:720px){.metagrid{grid-template-columns:repeat(2,1fr)}.metagrid div:nth-child(2n){border-right:none}}
+
+.verdict{padding:24px 40px;background:var(--accent-wash);border-top:1px solid var(--accent-line);display:flex;gap:14px;align-items:flex-start}
+@media(max-width:640px){.verdict{padding:20px 22px}}
+.verdict .k{font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.12em;color:#fff;background:var(--accent);padding:5px 10px;border-radius:5px;flex:none;margin-top:3px;text-transform:uppercase}
+.verdict p{font-size:15px;color:#1D4A6B;font-weight:600;line-height:1.7}
+
+.opener{display:flex;justify-content:center;padding:0 40px 26px;background:var(--accent-wash)}
+@media(max-width:640px){.opener{padding:0 22px 20px}}
+.openbtn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);
+  background:#fff;border:1px solid var(--accent-line);border-radius:999px;padding:11px 22px;transition:all .25s}
+.openbtn:hover{border-color:var(--accent);background:#fff}
+.openbtn .cv{width:15px;height:15px;flex:none;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
+.proj.open .openbtn .cv{transform:rotate(180deg)}
+.openbtn .lb-c{display:inline}.openbtn .lb-o{display:none}
+.proj.open .openbtn .lb-c{display:none}.proj.open .openbtn .lb-o{display:inline}
+
+.proj-detail{display:grid;grid-template-rows:0fr;transition:grid-template-rows .6s cubic-bezier(.25,.8,.25,1)}
+.proj.open .proj-detail{grid-template-rows:1fr}
+.proj-detail > .inner{overflow:hidden;min-height:0}
+.proj-body{padding:8px 40px 40px;border-top:1px solid var(--line)}
+@media(max-width:640px){.proj-body{padding:6px 22px 30px}}
+
+.step{padding:32px 0;border-bottom:1px dashed var(--line2)}
+.step:last-child{border-bottom:none;padding-bottom:6px}
+.step-h{display:flex;gap:14px;align-items:flex-start;margin-bottom:16px}
+.step-h em{font-family:var(--mono);font-style:normal;font-size:11px;font-weight:700;color:var(--accent);
+  border:1px solid var(--accent-line);width:26px;height:26px;border-radius:50%;display:grid;place-items:center;flex:none;background:var(--accent-wash)}
+.step-h h4{font-size:17.5px;font-weight:800;letter-spacing:-.025em;line-height:26px}
+.step p{color:var(--ink2);font-size:15px;margin-bottom:12px}
+.step p:last-child{margin-bottom:0}
+.step ul{list-style:none;margin:0 0 14px}
+.step ul li{position:relative;padding-left:17px;color:var(--ink2);font-size:14.8px;margin-bottom:8px;line-height:1.72}
+.step ul li::before{content:"";position:absolute;left:2px;top:11px;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.step ul li b{color:var(--ink);font-weight:700}
+.step ul ul{margin:8px 0 0}
+.step ul ul li::before{background:var(--line2)}
+
+.flow{display:flex;flex-wrap:wrap;align-items:stretch;gap:8px;margin:6px 0 18px}
+.flow .n{flex:1 1 150px;min-width:130px;background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.flow .n b{display:block;font-size:13px;font-weight:800;color:var(--ink);letter-spacing:-.01em}
+.flow .n span{font-size:11.8px;color:var(--muted);line-height:1.55;display:block;margin-top:4px}
+.flow .ar{display:grid;place-items:center;color:var(--line2);font-size:16px;font-weight:700;flex:none}
+@media(max-width:640px){.flow .ar{display:none}}
+
+table{width:100%;border-collapse:collapse;font-size:13.6px;margin:4px 0 16px}
+th,td{text-align:left;padding:11px 13px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--faint);text-transform:uppercase;background:var(--paper);border-bottom:1px solid var(--line2);white-space:nowrap}
+td{color:var(--ink2)}
+td strong{color:var(--ink);font-weight:700}
+tbody tr:hover{background:var(--paper)}
+.tscroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin-bottom:16px;border:1px solid var(--line);border-radius:10px}
+.tscroll table{margin:0}
+.tscroll td:first-child,.tscroll th:first-child{padding-left:16px}
+code,.mono{font-family:var(--mono);font-size:12.4px;background:var(--accent-wash);color:#1D4A6B;padding:2px 6px;border-radius:5px;letter-spacing:-.01em}
+
+.kpi6{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 18px}
+@media(max-width:760px){.kpi6{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.kpi6{grid-template-columns:1fr}}
+.kpi6 .k{border:1px solid var(--line);border-radius:11px;padding:15px 16px;background:#fff}
+.kpi6 .k .nm{font-size:13.5px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.kpi6 .k .fm{font-family:var(--mono);font-size:11.6px;color:var(--accent);background:var(--accent-wash);
+  padding:4px 7px;border-radius:5px;display:inline-block;margin:8px 0 7px;line-height:1.45}
+.kpi6 .k .wy{font-size:12.6px;color:var(--muted);line-height:1.62}
+.kpi6 .k.req{border-color:var(--accent-line);background:#FDFEFF}
+.kpi6 .k.req .nm::after{content:"필수";font-size:9.5px;font-weight:800;color:var(--accent);background:var(--accent-wash);
+  border:1px solid var(--accent-line);padding:2px 5px;border-radius:4px;margin-left:6px;vertical-align:2px;letter-spacing:.03em}
+
+.imgph{border:1.5px dashed var(--line2);border-radius:12px;padding:40px 20px;text-align:center;color:var(--faint);font-size:13px;margin:6px 0 18px;background:var(--paper)}
+figure{margin:6px 0 18px;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
+figure img{width:100%}
+figcaption{font-size:12.5px;color:var(--muted);padding:11px 15px;border-top:1px solid var(--line);background:#fff;line-height:1.6}
+
+.callout{border-left:3px solid var(--accent);background:var(--accent-wash);border-radius:0 10px 10px 0;padding:16px 20px;margin:6px 0 18px}
+.callout h5{font-size:13.5px;font-weight:800;color:#1D4A6B;margin-bottom:7px;letter-spacing:-.01em}
+.callout p,.callout li{font-size:14px;color:#1D4A6B;opacity:.94}
+.callout ul{margin:0}
+.callout ul li::before{background:var(--accent)}
+.callout.warn{border-left-color:var(--amber);background:#FDF7EC}
+.callout.warn h5,.callout.warn p,.callout.warn li{color:#7A4E08}
+.callout.warn ul li::before{background:var(--amber)}
+
+.abgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:6px 0 20px}
+@media(max-width:760px){.abgrid{grid-template-columns:repeat(2,1fr)}}
+.abcard{border:1px solid var(--line);border-radius:12px;padding:16px;background:#fff}
+.abcard .t{font-family:var(--mono);font-size:10.5px;font-weight:700;letter-spacing:.08em;color:var(--muted);text-transform:uppercase}
+.abcard .row{display:flex;align-items:baseline;gap:8px;margin-top:9px}
+.abcard .row .lab{font-family:var(--mono);font-size:11px;font-weight:700;width:12px;flex:none}
+.abcard .row.a .lab{color:var(--a)} .abcard .row.b .lab{color:var(--b)}
+.abcard .row .v{font-size:17px;font-weight:800;letter-spacing:-.03em;color:var(--ink)}
+.abcard .d{margin-top:11px;padding-top:9px;border-top:1px solid var(--line);font-size:12px;font-weight:700}
+.abcard .d.up{color:var(--good)} .abcard .d.dn{color:var(--bad)}
+
+.legend{display:flex;gap:16px;align-items:center;font-size:12.5px;font-weight:700;color:var(--muted);margin-bottom:10px}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block;margin-right:6px;vertical-align:-1px}
+.chartbox{border:1px solid var(--line);border-radius:12px;padding:20px;background:#fff;margin:6px 0 18px}
+.chartbox h5{font-size:14.5px;font-weight:800;letter-spacing:-.02em;margin-bottom:4px}
+.chartbox .cs{font-size:12.5px;color:var(--muted);margin-bottom:16px}
+
+.qa{border:1px solid var(--line);border-radius:12px;overflow:hidden;margin:6px 0 18px}
+.qa .q{background:var(--paper);padding:13px 18px;font-size:14px;font-weight:800;color:var(--ink);border-bottom:1px solid var(--line);letter-spacing:-.02em}
+.qa .q i{font-family:var(--mono);font-style:normal;font-size:11px;color:var(--accent);margin-right:8px;font-weight:700}
+.qa .a{padding:16px 18px;border-bottom:1px solid var(--line)}
+.qa .a:last-child{border-bottom:none}
+.qa .a p,.qa .a li{font-size:14.5px}
+.qa .a ul{margin-bottom:0}
+
+.budget{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:6px 0 18px}
+@media(max-width:760px){.budget{grid-template-columns:1fr}}
+.bcard{border:1px solid var(--line);border-radius:12px;padding:16px 18px;background:#fff}
+.bcard .seg{font-size:13.5px;font-weight:800;color:var(--ink);letter-spacing:-.02em}
+.bcard .bar{display:flex;height:9px;border-radius:5px;overflow:hidden;margin:12px 0 9px;background:var(--line)}
+.bcard .bar i{display:block;height:100%}
+.bcard .split{font-family:var(--mono);font-size:11px;font-weight:700;color:var(--muted);display:flex;justify-content:space-between}
+.bcard .split .sa{color:var(--a)} .bcard .split .sb{color:var(--b)}
+.bcard .rz{font-size:12.6px;color:var(--muted);margin-top:10px;padding-top:9px;border-top:1px solid var(--line);line-height:1.62}
+
+/* ---------- CONTACT ---------- */
+.contact{background:#101416;color:#fff;padding:84px 0;border-top:5px solid var(--accent)}
+.contact h2{color:#fff}
+.contact .shead::after{background:rgba(255,255,255,.14)}
+.contact .sub{color:rgba(255,255,255,.68)}
+.clist{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.12);border-radius:14px;overflow:hidden;margin-top:40px}
+@media(max-width:760px){.clist{grid-template-columns:repeat(2,1fr)}}
+.clist a{background:#161B1E;padding:24px 22px;display:block;color:#fff}
+.clist a:hover{background:#1D2429;text-decoration:none}
+.clist span{display:block;font-family:var(--mono);font-size:10px;font-weight:700;letter-spacing:.14em;color:rgba(255,255,255,.45);text-transform:uppercase}
+.clist b{font-size:14px;font-weight:700;letter-spacing:-.01em;display:block;margin-top:8px;word-break:break-all}
+footer{padding:32px 0;border-top:1px solid rgba(255,255,255,.12);margin-top:44px;font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.7}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1)}
+.rv.on{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}
+  .proj-detail{transition:none}}
+@media print{.nav,.btns,.opener,.topbar{display:none}.proj{break-inside:avoid;box-shadow:none}
+  .proj-detail{grid-template-rows:1fr !important}}
+</style>
+</head>
+
+<body>
+<div class="topbar"></div>
+
+<nav class="nav">
+  <div class="wrap">
+    <div class="brand">DATA ENGINEER<i> ·</i> PORTFOLIO 2026</div>
+    <div class="navlinks">
+      <a href="#about">소개</a>
+      <a href="#resume">이력</a>
+      <a href="#skills">역량</a>
+      <a href="#projects">프로젝트</a>
+      <a href="#contact" class="cta">연락처</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <div class="k-label">DATA ENGINEER · CHOI GYUYOUNG</div>
+        <h1 class="disp"><span class="thin">데이터 엔지니어</span><br><em class="acc">최규영</em>입니다.</h1>
+        <p class="lede">
+          데이터 <b>수집부터 ETL 파이프라인 구축, DW 모델링까지</b> 수행하며
+          분석과 서비스에 활용할 수 있는 데이터 구조를 설계해왔습니다.
+        </p>
+        <div class="metaline">
+          <span class="pill">Python</span><span class="pill">SQL</span>
+          <span class="pill">Airflow</span><span class="pill">AWS</span>
+          <span class="pill">GCP</span><span class="pill">Docker</span>
+        </div>
+        <div class="btns">
+          <a href="#projects" class="btn p">프로젝트 보기 ↓</a>
+          <a href="#resume" class="btn s">이력 보기</a>
+        </div>
+      </div>
+
+      <aside class="pcard rv">
+        <div class="ava">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.34 0-10 1.67-10 5v3h20v-3c0-3.33-6.66-5-10-5z"/>
+          </svg>
+        </div>
+        <h3>최규영</h3>
+        <div class="role">DATA ENGINEER</div>
+        <div class="rows">
+          <div class="row"><span>Email</span><a href="mailto:0427paul@gmail.com"><b>0427paul@gmail.com</b></a></div>
+          <div class="row"><span>Blog</span><a href="https://427paul.tistory.com/" target="_blank" rel="noopener"><b>427paul.tistory.com</b></a></div>
+          <div class="row"><span>GitHub</span><a href="https://github.com/427paul" target="_blank" rel="noopener"><b>github.com/427paul</b></a></div>
+          <div class="row"><span>LinkedIn</span><a href="https://www.linkedin.com/in/427paul/" target="_blank" rel="noopener"><b>linkedin.com/in/427paul/</b></a></div>
+        </div>
+        <a class="btn s" href="mailto:0427paul@gmail.com">메일 보내기</a>
+      </aside>
+    </div>
+
+    <div class="statrow rv">
+      <div><b>End-to-End</b><span>DATA LIFECYCLE</span><small>수집 · 처리 · 저장 · 서빙까지 연결</small></div>
+      <div><b>2 Projects</b><span>KEY PROJECTS</span><small>스마트 맛집 추천 · 자연어 RAG 검색</small></div>
+      <div><b>Cloud DW</b><span>INFRASTRUCTURE</span><small>AWS S3/Redshift · GCS/BigQuery</small></div>
+      <div><b>2026.08</b><span>GRADUATION</span><small>세종대학교 컴퓨터공학과 졸업</small></div>
+    </div>
+  </div>
+</header>
+
+
+<section class="soft-sec" id="resume">
+  <div class="wrap">
+    <div class="shead"><span class="k-label">01 — 이력</span></div>
+    <h2>경력 <span class="lite">및 학력</span></h2>
+    <div class="resume rv">
+      <div>
+        <div class="rblock">
+          <h3>교육 및 경력</h3>
+
+          <div class="entry">
+            <div class="l">
+              <h4>FinDA 금융데이터분석 심화과정 수료</h4>
+              <div class="org">BDAI</div>
+              <ul>
+                <li><b>Tableau</b>를 활용한 금융 데이터 대시보드 시각화</li>
+                <li><b>BigQuery</b>를 활용한 대용량 금융 로그 데이터 처리</li>
+              </ul>
+            </div>
+            <span class="datepill">2026.07 – 2026.08</span>
+          </div>
+
+          <div class="entry">
+            <div class="l">
+              <h4>AI 데이터 엔지니어링 수료</h4>
+              <div class="org">BDAI</div>
+              <ul>
+                <li>데이터 <b>수집 → 처리 → 저장 → 서빙</b>의 End-to-End 파이프라인 구축</li>
+                <li>API 기반 데이터 수집</li>
+                <li>데이터 청킹·임베딩·VectorDB적재</li>
+                <li>Google Cloud Storage·BigQuery 기반 데이터 적재</li>
+                <li>Streamlit·FastAPI 기반 대시보드 배포</li>
+              </ul>
+            </div>
+            <span class="datepill">2026.07 – 2026.08</span>
+          </div>
+
+          <div class="entry">
+            <div class="l">
+              <h4>데이터 엔지니어링 데브코스 수료</h4>
+              <div class="org">그렙</div>
+              <ul>
+                <li>Python·Spark 기반 데이터 수집 및 전처리</li>
+                <li>S3·Redshift 적재, Airflow 오케스트레이션, Superset 시각화</li>
+                <li>머신러닝 모델링을 포함한 데이터 엔지니어 핵심 역량 학습</li>
+              </ul>
+            </div>
+            <span class="datepill">2025.09 – 2026.01</span>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="rblock">
+          <h3>학력</h3>
+          <div class="entry">
+            <div class="l">
+              <h4>세종대학교 컴퓨터공학과</h4>
+              <div class="org">졸업</div>
+            </div>
+            <span class="datepill">2020.03 – 2026.08</span>
+          </div>
+        </div>
+
+        <div class="rblock">
+          <h3>자격증</h3>
+          <div class="entry"><div class="l"><h4>ADsP (데이터분석 준전문가)</h4></div><span class="datepill">2026.06</span></div>
+          <div class="entry"><div class="l"><h4>SQLD (SQL 개발자)</h4></div><span class="datepill">2025.12</span></div>
+        </div>
+
+        <div class="rblock">
+          <h3>언어</h3>
+          <div class="entry"><div class="l"><h4>TOEIC 830</h4></div><span class="datepill">2026.02</span></div>
+          <div class="entry"><div class="l"><h4>TOEIC Speaking AL</h4></div><span class="datepill">2025.09</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="shead"><span class="k-label">02 — 역량</span></div>
+    <h2>도구 <span class="lite">및 역량</span></h2>
+
+    <h3 class="skgroup">TECH STACK</h3>
+    <div class="skills rv">
+      <div class="skill">
+        <h4>Framework</h4>
+        <div class="tags"><span class="tag">Django · 중</span><span class="tag">Flask · 중</span><span class="tag">Streamlit · 중</span></div>
+      </div>
+      <div class="skill">
+        <h4>Data Engineering</h4>
+        <div class="tags"><span class="tag">Airflow · 중</span><span class="tag">dbt · 중</span><span class="tag">AWS S3 · 중</span><span class="tag">Redshift · 중</span><span class="tag">GCS · 중</span><span class="tag">BigQuery · 중</span><span class="tag">Spark · 중</span><span class="tag">Docker · 중</span><span class="tag">MySQL · 상</span></div>
+      </div>
+      <div class="skill">
+        <h4>Data Analysis</h4>
+        <div class="tags"><span class="tag">Python · 상</span><span class="tag">SQL · 상</span><span class="tag">Superset · 상</span><span class="tag">Tableau · 중</span><span class="tag">Data Studio · 중</span></div>
+      </div>
+      <div class="skill">
+        <h4>AI &amp; LLM</h4>
+        <div class="tags"><span class="tag">Machine Learning · 중</span><span class="tag">PyTorch · 중</span><span class="tag">LangChain · 중</span><span class="tag">LangGraph · 중</span><span class="tag">Prompt Engineering · 중</span></div>
+      </div>
+    </div>
+
+    <h3 class="skgroup">CORE CAPABILITIES</h3>
+    <div class="softs rv">
+      <div class="soft-card"><h4>데이터 파이프라인</h4><p><b>수집부터 서빙까지 연결</b>합니다. Python 기반 수집·전처리, 클라우드 저장소, DW, 변환 및 오케스트레이션을 하나의 흐름으로 구성합니다.</p></div>
+      <div class="soft-card"><h4>데이터 웨어하우스</h4><p><b>분석과 서비스 목적에 맞는 데이터 구조</b>를 설계합니다. Raw 데이터 보존과 분석용 마트의 역할을 구분하고 서빙 단계의 Join 비용도 고려합니다.</p></div>
+      <div class="soft-card"><h4>데이터 품질과 모니터링</h4><p><b>수집 건수·Null·중복·정합성</b>을 검증하고 Slack Webhook으로 파이프라인 상태와 장애를 확인할 수 있도록 구성합니다.</p></div>
+      <div class="soft-card"><h4>AI 데이터 활용</h4><p>LLM Query Planner, 임베딩, Vector DB 등 <b>AI 서비스가 사용할 수 있는 데이터 구조</b>와 검색 파이프라인을 직접 구현한 경험이 있습니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="soft-sec" id="projects">
+  <div class="wrap">
+    <div class="pintro">
+      <div class="shead"><span class="k-label">03 — 프로젝트</span></div>
+      <h2>프로젝트 <span class="lite">2건</span></h2>
+      <p class="sub">데이터 엔지니어링의 핵심인 수집·처리·저장·모델링·서빙·운영을 중심으로 정리했습니다.</p>
+    </div>
+
+    <article class="proj rv" id="p2">
+      <button class="proj-head" aria-expanded="false" aria-controls="p2-detail">
+        <div class="phead-top"><span class="pnum">Project 01 · AI Data Engineering</span><span class="pyear">2026.07 – 2026.08</span></div>
+        <h3>자연어 기반 데이터 검색 RAG 대시보드
+          <span class="sub-t">GCS / BigQuery / SentenceTransformers / ChromaDB / Gemini / Streamlit</span>
+        </h3>
+        <p class="oneline">공공 개인사업자 평가정보를 자연어로 검색할 수 있도록 <b>정형 필터 + 의미 검색</b>을 결합한 하이브리드 RAG 검색 시스템을 단독 구현했습니다.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">GCS</span><span class="chip">BigQuery</span><span class="chip">Gemini API</span><span class="chip">ChromaDB</span><span class="chip">FastAPI</span><span class="chip">Streamlit</span></div>
+        <div class="metagrid">
+          <div><span>Role</span><b>ETL · Vector RAG · Serving</b></div>
+          <div><span>Data</span><b>공공 개인사업자 평가정보 API</b></div>
+          <div><span>Search</span><b>Hard Filter + Vector Search</b></div>
+          <div><span>Deploy</span><b>GCP Cloud Run</b></div>
+        </div>
+      </button>
+      <div class="verdict"><span class="k">핵심 성과</span><p><b>전수 벡터 검색의 지연·오검색 문제를 하이브리드 검색으로 개선</b>했습니다. 프로젝트 기록 기준 검색 시간은 <b>20초 → 15초</b>, 정답률은 <b>70% → 90%</b>로 향상되었습니다.</p></div>
+      <div class="opener"><span class="openbtn"><span class="lb-c">구현 과정 전체 보기</span><span class="lb-o">접기</span><svg class="cv" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+
+      <div class="proj-detail" id="p2-detail"><div class="inner"><div class="proj-body">
+        <div class="step"><div class="step-h"><em>1</em><h4>GCS 데이터 레이크 및 BigQuery 적재</h4></div>
+          <ul><li>공공 비즈니스 평가 API의 원천 JSON을 <b>GCS</b>에 아카이빙</li><li>MD5 해시 검증으로 데이터 전송 무결성을 확인</li><li>BigQuery에 <code>biz_evaluations</code> 및 <code>ingest_metadata</code> 구조로 적재해 데이터 계보를 관리</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>2</em><h4>시맨틱 청킹 및 메타데이터 분리</h4></div>
+          <ul><li>코드화된 원천 값을 임베딩 모델이 이해하기 쉬운 <b>서술형 텍스트</b>로 재구성</li><li>지역·성별·연령대·업종명 등 정형 조건은 메타데이터로 분리</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>3</em><h4>임베딩 및 ChromaDB 인덱싱</h4></div>
+          <ul><li>SentenceTransformers로 문장을 <b>128차원 벡터</b>로 변환</li><li>L2 정규화를 적용해 코사인 유사도 검색을 효율화</li><li>ChromaDB에 벡터·텍스트·메타데이터를 저장해 복합 검색을 지원</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>4</em><h4>Gemini Query Planner</h4></div>
+          <ul><li>자연어 질의를 JSON Schema 기반으로 구조화</li><li><b>Hard Filter</b>와 <b>Semantic Query</b>를 분리해 검색 계획 생성</li><li>예: “강릉 지역의 자동차 부품 판매업 여성 대표자” → 지역·성별·업종 조건과 의미 검색 문맥으로 분해</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>5</em><h4>하이브리드 검색 및 서비스 서빙</h4></div>
+          <div class="flow"><div class="n"><b>Natural Language</b><span>사용자 질의</span></div><div class="ar">→</div><div class="n"><b>Gemini Planner</b><span>Filter / Semantic 분리</span></div><div class="ar">→</div><div class="n"><b>ChromaDB</b><span>where + vector</span></div><div class="ar">→</div><div class="n"><b>Streamlit</b><span>결과 카드</span></div></div>
+          <ul><li>메타데이터 조건으로 후보군을 먼저 압축한 뒤 벡터 유사도를 계산</li><li>Streamlit에서 검색 계획·수동 필터·유사도 점수·사업자 상세 정보를 제공</li><li>FastAPI로 <code>page_view</code>, <code>record_search</code> 행동 로그를 비동기 수집</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>6</em><h4>트러블슈팅 및 성과</h4></div>
+          <div class="callout warn"><h5>전수 1:1 벡터 검색의 성능·정확도 문제</h5><p>모든 벡터를 질의 벡터와 비교하면서 최대 <b>20초</b>의 지연이 발생했고, 지역·성별 등 정형 조건이 의미 유사도에 묻히는 오검색이 발생했습니다.</p></div>
+          <div class="callout"><h5>하이브리드 필터링으로 개선</h5><p>Gemini가 정형 조건을 추출하고 ChromaDB <code>where</code> 절로 후보군을 먼저 줄인 후 벡터 검색을 수행했습니다. 기록된 테스트 기준 <b>15초 / 정답률 90%</b>로 개선되었습니다.</p></div>
+        </div>
+      </div></div></div>
+    </article>
+
+        <article class="proj rv" id="p1">
+      <button class="proj-head" aria-expanded="false" aria-controls="p1-detail">
+        <div class="phead-top"><span class="pnum">Project 02 · Data Engineering</span><span class="pyear">2025.12 – 2026.01</span></div>
+        <h3>자연어 기반 스마트 맛집 추천 플랫폼
+          <span class="sub-t">Selenium / OpenCV / S3 / Redshift / Airflow / dbt / K-Means</span>
+        </h3>
+        <p class="oneline">동적 웹 데이터와 Canvas 그래프를 수집·수치화하고, <b>S3 → Redshift → dbt → Airflow</b>로 연결한 End-to-End 데이터 파이프라인을 구축했습니다.</p>
+        <div class="chips"><span class="chip">Python</span><span class="chip">Selenium</span><span class="chip">OpenCV</span><span class="chip">AWS S3</span><span class="chip">Redshift</span><span class="chip">Airflow</span><span class="chip">dbt</span><span class="chip">K-Means</span></div>
+        <div class="metagrid">
+          <div><span>Role</span><b>데이터 엔지니어링 전 과정</b></div>
+          <div><span>Source</span><b>카카오맵 맛집 데이터</b></div>
+          <div><span>Team</span><b>4인 팀 프로젝트</b></div>
+          <div><span>Output</span><b>추천 데이터 마트 · ML</b></div>
+        </div>
+      </button>
+      <div class="verdict"><span class="k">핵심 성과</span><p><b>ThreadPoolExecutor 병렬화로 크롤링 성능을 1.5배 개선</b>하고, Canvas 그래프를 OpenCV로 수치화했습니다.</p></div>
+      <div class="opener"><span class="openbtn"><span class="lb-c">구현 과정 전체 보기</span><span class="lb-o">접기</span><svg class="cv" viewBox="0 0 16 16" fill="none"><path d="M3 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span></div>
+
+      <div class="proj-detail" id="p1-detail"><div class="inner"><div class="proj-body">
+        <div class="step"><div class="step-h"><em>1</em><h4>데이터 수집 및 병렬화</h4></div>
+          <ul><li>Selenium과 BeautifulSoup으로 맛집 상세 정보(메뉴·가격·영업시간·평점·리뷰)를 수집</li>
+          <li>순차 처리의 I/O 병목을 해결하기 위해 <b>ThreadPoolExecutor 기반 동시성 크롤러</b>를 설계</li>
+          <li>수집 처리 성능을 <b>1.5배</b> 개선</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>2</em><h4>Canvas 데이터의 OpenCV 수치화</h4></div>
+          <ul><li>HTML 텍스트로 추출할 수 없는 방문자 요일·시간대별 Canvas 그래프를 캡처</li>
+          <li><b>Color Masking</b>으로 그래프 픽셀 좌표를 추출해 혼잡도 지수로 변환</li>
+          <li>비정형 시각 데이터를 추천 파이프라인의 정량 피처로 <b>자산화</b></li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>3</em><h4>AWS Data Lake 및 DW 모델링</h4></div>
+          <div class="flow"><div class="n"><b>Raw</b><span>API·Crawling → S3</span></div><div class="ar">→</div><div class="n"><b>Warehouse</b><span>Redshift</span></div><div class="ar">→</div><div class="n"><b>Transform</b><span>dbt Data Mart</span></div></div>
+          <ul><li>원천 데이터를 S3에 보존</li><li>Redshift 적재 후 <b>dbt 기반 분석용 Data Mart</b> 구성</li>
+        </div>
+        <div class="step"><div class="step-h"><em>4</em><h4>K-Means 클러스터링</h4></div>
+          <ul><li>혼잡도·리뷰 감성·가격대·방문 목적 등 다차원 변수를 StandardScaler로 표준화</li>
+          <li>Elbow Method와 Silhouette Score를 비교해 <b>k=8</b> 도출</li>
+          <li>군집별 테마를 매핑하고 추천 스코어링 알고리즘과 연계</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>5</em><h4>Airflow 오케스트레이션 및 운영</h4></div>
+          <ul><li>API·크롤링 → CV 수치화 → S3 → Redshift → dbt를 <b>Airflow DAG</b>으로 표준화</li><li>Docker 환경으로 실행 환경을 일관되게 구성</li><li>수집 건수·Null·결측치를 검증하고 <b>Slack Webhook</b>으로 장애 알림</li></ul>
+        </div>
+        <div class="step"><div class="step-h"><em>6</em><h4>트러블슈팅</h4></div>
+          <div class="callout warn"><h5>중복 데이터 누적 문제</h5><p>동적 렌더링과 페이징 과정에서 동일 Place ID가 반복 수집되는 문제를 확인했습니다. <b>Place ID 기반 Set 중복 검사</b>와 전처리 중복 제거·검증 로직을 추가해 데이터 정합성을 확보했습니다.</p></div>
+          <div class="callout"><h5>데이터 수집 속도 개선</h5><p>초기 설계한 순차적 크롤링으로는 데이터 수집에 과도한 시간이 소요됨을 확인했습니다(200건 기준 8분 30초). 이를 <b>Thread Pool</b> 방식을 도입하여 병렬 크롤링 방식을 도입하여 기존 대비 <b>수집 속도를 약 1.5배(8분 30초 → 5분 30초) 향상</b>시켰습니다.</p></div>
+        </div>
+      </div></div></div>
+    </article>
+  </div>
+</section>
+
+<section id="contact" class="contact">
+  <div class="wrap">
+    <div class="shead"><span class="k-label" style="color:var(--accent-soft)">04 — 연락처</span></div>
+    <h2>Contact <span class="lite">&amp; Channels</span></h2>
+    <p class="sub">데이터 엔지니어링 및 협업 관련 문의는 아래 채널을 통해 연락 부탁드립니다.</p>
+    <div class="clist rv">
+      <a href="mailto:0427paul@gmail.com"><span>Email</span><b>0427paul@gmail.com</b></a>
+      <a href="https://427paul.tistory.com/" target="_blank" rel="noopener"><span>Blog</span><b>427paul.tistory.com ↗</b></a>
+      <a href="https://github.com/427paul" target="_blank" rel="noopener"><span>GitHub</span><b>github.com/427paul ↗</b></a>
+      <a href="https://www.linkedin.com/in/427paul/" target="_blank" rel="noopener"><span>LinkedIn</span><b>linkedin.com/in/427paul/ ↗</b></a>
+    </div>
+    <footer>
+      <p>© 2026 CHOI GYU-YOUNG · DATA ENGINEER PORTFOLIO</p>
+      <p style="margin-top:6px">Data Collection · ETL · Data Warehouse · AI Data Pipeline · Serving</p>
+    </footer>
+  </div>
+</section>
+
+<script>
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target);}
+      });
+    },{threshold:.08,rootMargin:'0px 0px -40px 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }else{els.forEach(function(e){e.classList.add('on');});}
+
+  function setOpen(proj,open){
+    proj.classList.toggle('open',open);
+    var head=proj.querySelector('.proj-head');
+    if(head) head.setAttribute('aria-expanded',open?'true':'false');
+  }
+  function toggle(proj){setOpen(proj,!proj.classList.contains('open'));}
+
+  document.querySelectorAll('.proj').forEach(function(proj){
+    var head=proj.querySelector('.proj-head');
+    var opener=proj.querySelector('.opener');
+    if(head) head.addEventListener('click',function(){toggle(proj);});
+    if(opener) opener.addEventListener('click',function(e){e.stopPropagation();toggle(proj);});
+  });
+
+  window.addEventListener('beforeprint',function(){
+    document.querySelectorAll('.proj').forEach(function(p){setOpen(p,true);});
+  });
+})();
+</script>
+</body>
+
+</html>
