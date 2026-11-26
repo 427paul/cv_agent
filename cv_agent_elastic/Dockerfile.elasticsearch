@@ -1,0 +1,4 @@
+FROM docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+
+# 한국어 형태소 분석기(analysis-nori) 플러그인 사전 설치
+RUN bin/elasticsearch-plugin install --batch analysis-nori

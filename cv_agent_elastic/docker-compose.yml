@@ -1,27 +1,27 @@
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.15.3
+    build:
+      context: .
+      dockerfile: Dockerfile.elasticsearch
     container_name: cv_agent_elasticsearch
     environment:
       - discovery.type=single-node
       - xpack.security.enabled=false
-      - xpack.security.http.ssl.enabled=false
       - ES_JAVA_OPTS=-Xms512m -Xmx512m
     ports:
       - "9200:9200"
     volumes:
       - es_data:/usr/share/elasticsearch/data
     healthcheck:
-      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health || exit 1"]
+      test: ["CMD-SHELL", "curl -sf http://localhost:9200/_cluster/health >/dev/null || exit 1"]
       interval: 10s
       timeout: 5s
-      retries: 12
+      retries: 15
 
-  # 선택 사항: Docker 내에서 앱까지 함께 실행하려면 아래 프로필로 기동하세요:
-  #   GOOGLE_API_KEY=... docker compose --profile app up -d --build
   cv-agent-elastic:
-    profiles: ["app"]
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: cv_agent_elastic_app
     depends_on:
       elasticsearch:
@@ -30,15 +30,13 @@ services:
       - PORT=8080
       - ELASTICSEARCH_URL=http://elasticsearch:9200
       - ELASTICSEARCH_INDEX=${ELASTICSEARCH_INDEX:-portfolio_rag_index}
-      - ELASTICSEARCH_SEARCH_MODE=${ELASTICSEARCH_SEARCH_MODE:-hybrid}
-      - ELASTICSEARCH_VERIFY_CERTS=false
       - GOOGLE_API_KEY=${GOOGLE_API_KEY:-}
       - OPENROUTER_API_KEY=${OPENROUTER_API_KEY:-}
       - OPENROUTER_MODEL=${OPENROUTER_MODEL:-google/gemini-2.5-flash-lite}
       - LANGCHAIN_API_KEY=${LANGCHAIN_API_KEY:-}
       - LANGCHAIN_PROJECT=${LANGCHAIN_PROJECT:-cv-agent-elastic}
     ports:
-      - "8501:8080"
+      - "8080:8080"
 
 volumes:
   es_data:
